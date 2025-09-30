@@ -164,6 +164,7 @@ pop_two_elements_and_push_overlap
 
 //gera um conjunto com todos os pares distintos de strings do conjunto
 // Ex: all_distinct_pairs({"A", "B", "C"}) retorna {("A", "B"), ("A", "C"), ("B", "A"), ("B", "C"), ("C", "A"), ("C", "B")}
+//Cada elemento desse SET é um par de strings distintas
 auto
 all_distinct_pairs (const Set <String>& ss) -> Set <Pair <String, String>>
 {
