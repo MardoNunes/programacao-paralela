@@ -235,30 +235,30 @@ shortest_superstring (Set <String> t) -> String
 
 
     //quando o conjunto tiver apenas um elemento, retorna esse elemento, que é a menor superstring
-    return first_element (t) ;
+    return first_element (t);
 }
 
 //funções de entrada e saída
 inline auto
 write_string_and_break_line (OutStream& out, String s) -> void
 {
-    out << s << std::endl ;
+    out << s << std::endl;
 }
 
 inline auto
 read_size (InStream& in) -> Size
 {
-    Size n ;
-    in >>  n ;
-    return n ;
+    Size n;
+    in >>  n;
+    return n;
 }
 
 inline auto
 read_string (InStream& in) -> String
 {
-    String s ;
-    in >>  s ;
-    return s ;
+    String s;
+    in >>  s;
+    return s;
 }
 
 auto
