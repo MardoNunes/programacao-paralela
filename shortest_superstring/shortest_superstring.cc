@@ -131,7 +131,7 @@ commom_suffix_and_prefix (const String& a, const String& b) -> String
             x = s ;
         }
     }
-    return x ;
+    return x ;  //retorna uma string com o maior sufixo de a que é prefixo de b
 }
 
 //retorna o tamanho do maior sufixo de s que é prefixo de t, maior sobreposição entre s e t
@@ -139,7 +139,7 @@ commom_suffix_and_prefix (const String& a, const String& b) -> String
 inline auto
 overlap_value (const String& s, const String& t) -> SizeType <String>
 {
-    return size (commom_suffix_and_prefix (s, t)) ;
+    return size (commom_suffix_and_prefix (s, t)) ; //retorna um inteiro com o tamanho do maior sufixo de s que é prefixo de t
 }
 
 //realiza a sobreposição entre s e t
@@ -156,9 +156,19 @@ inline auto
 pop_two_elements_and_push_overlap
         (Set <String>& ss, const Pair <String, String>& p) -> Set <String>&
 {
-    ss = remove (ss, p.first)  ;
-    ss = remove (ss, p.second) ;
-    ss = push   (ss, overlap (p.first, p.second)) ;
+
+    //elementos removidos do conjunto
+    standard_output << "pop_two_elements_and_push_overlap: overlap_value(" << p.first << ", " << p.second << ") \n";
+
+    ss = remove (ss, p.first);  //remove o primeiro elemento do par do conjunto
+    ss = remove (ss, p.second); //remove o segundo elemento do par do conjunto
+    ss = push   (ss, overlap (p.first, p.second)) ; //insere a sobreposição dos dois elementos do par no conjunto
+
+    standard_output << "String resultante ate aqui: ";
+    for (const String& s : ss) {
+        standard_output << s << " ";
+    }
+    standard_output << "\n\n" ;
     return ss ;
 }
 
@@ -174,6 +184,12 @@ all_distinct_pairs (const Set <String>& ss) -> Set <Pair <String, String>>
             if (s1 != s2) x.insert (make_pair (s1, s2)) ;
         }
     }
+    //todos os elemetnos do conjunto x
+    standard_output << "all_distinct_pairs: " ;
+    for (const auto& p : x) {
+        standard_output << "(" << p.first << ", " << p.second << ") \n" ;
+    }
+
     return x ;
 }
 
@@ -211,10 +227,13 @@ shortest_superstring (Set <String> t) -> String
     while (at_least_two_elements_in (t)) {  //enquanto o conjunto tiver pelo menos dois elementos
         //1. encontra o par de strings com maior sobreposição
         //2. remove os dois elementos do par do conjunto e insere a sobreposição deles
+        // t recebe o a string resultante da sobreposição dos dois elementos do par
         t = pop_two_elements_and_push_overlap
             ( t
             , pair_of_strings_with_highest_overlap_value (t) ) ;
     }
+
+
     //quando o conjunto tiver apenas um elemento, retorna esse elemento, que é a menor superstring
     return first_element (t) ;
 }
